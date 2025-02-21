@@ -4,14 +4,15 @@ export const post = async (req, res) => {
 
     const numbers = [];
     const alphabets = [];
+    console.log(data);
 
-    data.forEach((item) => {
+    for (const item of data) {
       if (!isNaN(item)) {
         numbers.push(item);
       } else {
         alphabets.push(item);
       }
-    });
+    }
 
     const highestAlphabet =
       alphabets.length > 0 ? alphabets.sort().slice(-1)[0] : null;
