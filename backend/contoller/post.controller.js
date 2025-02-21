@@ -6,7 +6,7 @@ export const post = async (req, res) => {
     const alphabets = [];
     console.log(data);
 
-    for (const item of data) {
+    for (const item of data.data) {
       if (!isNaN(item)) {
         numbers.push(item);
       } else {
