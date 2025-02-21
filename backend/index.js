@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
-app.use("/", postRouter);
+app.use("/bfhl", postRouter);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

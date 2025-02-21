@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import axios from "axios";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+    const [input, setInput] = useState("");
+    const [response, setResponse] = useState(null);
+    const [error, setError] = useState("");
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    const handleSubmit = async () => {
+        try {
+            const res = await axios.post("http://localhost:3000/bfhl", { data: JSON.parse(input) });
+            setResponse(res.data);
+            setError("");
+        } catch (err) {
+            setError("Invalid JSON format or request error.");
+            setResponse(null);
+        }
+    };
 
-export default App
+    return (
+        <div style={{ textAlign: "center", marginTop: "50px" }}>
+            <h2>Full Stack Challenge</h2>
+            <textarea rows="4" cols="50" value={input} onChange={(e) => setInput(e.target.value)} />
+            <br />
+            <button onClick={handleSubmit}>Submit</button>
+
+            {error && <p style={{ color: "red" }}>{error}</p>}
+
+            {response && (
+                <div>
+                    <h3>Response</h3>
+                    <pre>{JSON.stringify(response, null, 2)}</pre>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default App;
