@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
+import OptionList from "../components/OptionList";
 
 const App = () => {
   const [input, setInput] = useState("");
   const [response, setResponse] = useState(null);
   const [error, setError] = useState("");
+  const options = [
+    { key: "alphabets", label: "Alphabets" },
+    { key: "numbers", label: "Numbers" },
+    { key: "highestAlphabet", label: "Highest Alphabet" },
+  ];
 
   const handleSubmit = async () => {
     try {
@@ -22,7 +28,13 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}>
       <h2>Bajaj Challenge</h2>
       <textarea
         rows="4"
@@ -37,8 +49,7 @@ const App = () => {
 
       {response && (
         <div>
-          <h3>Response</h3>
-          <pre>{JSON.stringify(response, null, 2)}</pre>
+          <OptionList jsonData={response} />
         </div>
       )}
     </div>
