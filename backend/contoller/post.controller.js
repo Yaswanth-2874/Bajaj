@@ -1,12 +1,13 @@
 export const post = async (req, res) => {
   try {
-    const { data } = req.body;
-
+    let { data } = req.body;
+    if (Array.isArray(data) === false) data = data.data;
     const numbers = [];
     const alphabets = [];
+
     console.log(data);
 
-    for (const item of data.data) {
+    for (const item of data) {
       if (!isNaN(item)) {
         numbers.push(item);
       } else {
