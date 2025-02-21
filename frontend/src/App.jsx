@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import OptionList from "../components/OptionList";
 
 const App = () => {
+  useEffect(() => {
+    document.title = "22BCS16081";
+  }, []);
   const [input, setInput] = useState("");
   const [response, setResponse] = useState(null);
   const [error, setError] = useState("");
